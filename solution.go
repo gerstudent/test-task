@@ -5,16 +5,19 @@ import (
 	"strings"
 )
 
-func main() {
-	var str string
-	fmt.Scan(&str)
-	fmt.Println(isValid(str))
-}
+const Balanced = "Скобки сбалансированы"
+const NotBalanced = "Скобки несбалансированы"
 
 var brackets = map[rune]rune{
 	'{': '}',
 	'(': ')',
 	'[': ']',
+}
+
+func main() {
+	var str string
+	fmt.Scan(&str)
+	fmt.Println(isValid(str))
 }
 
 func isValid(s string) string {
@@ -33,15 +36,14 @@ func isValid(s string) string {
 
 		ln := len(stack)
 		if ln == 0 || stack[ln-1] != elem {
-			return "Скобки несбалансированы"
+			return NotBalanced
 		}
 
 		stack = stack[:ln-1]
 	}
 
 	if len(stack) == 0 {
-		return "Скобки сбалансированы"
+		return Balanced
 	}
-
-	return "Скобки несбалансированы"
+	return NotBalanced
 }
